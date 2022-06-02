@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <link rel="stylesheet" href="./style.css" media="screen">
     </head>
     <body>
         <canvas style="width:100%; height:100%; position: absolute; top: 0; left: 0;" width=512 height=512 id="main-canvas"></canvas>
         <script src="/loader.js"></script>
         <script src="/canvas.js"></script>
+
+
+        <!-- buttons for DM to use-->
+        <div calss = "DM" id = "DMTools"> 
+
+            
+            <button class = buttonTool id = "upLayer" title="Move up layer"><span style="font-family:Wingdings">&#217;</span></button>
+            <button class = buttonTool id = "downLayer" title="Move down layer"><span style="font-family:Wingdings">&#218;</span></button>
+            <button class = buttonTool id = "maps" title="Open map"><span style="font-family:Webdings">&#83;</span></button>
+            <button class = buttonTool id = "tokens" title="Tokens"><span style="font-family:Wingdings">&#134;</span></button>
+
+        </div>
+
+        <!-- buttons for general player and DM use-->
+        <div id = "sideBar"> 
+            <button class = buttonToolSide id = "pan" title="Pan map"><span style="font-family:Wingdings">&#73;</span></button>
+            <button class = buttonToolSide id = "brush" title="Brush"><span style="font-family: 'Wingdings 2'">&#35;</span></button>
+            <button class = buttonToolSide id = "ruler" title="Ruler"> <span style="font-family: 'Wingdings 3'">&#216;</span></button>
+        </div>
+
+
+
     </body>
 </html>
