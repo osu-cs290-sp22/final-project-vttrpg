@@ -1,8 +1,3 @@
-type SessionCreateInfo = {
-    name: string;
-    password: string;
-    dmPassword: string;
-};
 
 // called "Circle2" because apparently there's a namespace collision
 type Circle2 = {
@@ -35,6 +30,8 @@ type Token = {
 
 type BattlemapTileLayer = {
     images: number[][] // 2D array of indexes into the imagePalette array
+    width: number,
+    height: number
 }
 
 type BattlemapShapeLayer = {
@@ -63,11 +60,38 @@ type Session = {
 
 
 // server request types:
+type SessionRequest = 
+      GetSessionRequest
+    | CreateSessionRequest
+    | EndSessionRequest
+    | JoinSessionRequest
+    | AddBattlemapRequest
+    | BattlemapRequest;
+
+type GetSessionRequest = {
+    type: "GetSession",
+    handle: number
+}
+
+type CreateSessionRequest = {
+    type: "CreateSession",
+    name: string;
+    password: string;
+    dmPassword: string;
+    handle: number;
+};
+
+type EndSessionRequest = {
+    type: "EndSession"
+};
+
 type JoinSessionRequest = {
     type: "JoinSession",
     connectionType: "player" | "dm",
     session: string,
-    password: string
+    password: string,
+    name: string,
+    handle: number
 }
 
 type AddBattlemapRequest = {
@@ -89,9 +113,12 @@ type BattlemapRequest = {
 
 type SetTilesRequest = {
     type: "SetTiles",
-    x: number[],
-    y: number[],
-    tile: number[]
+    tiles: ({
+        x: number,
+        y: number,
+        tile: number,
+        layer: number
+    })[]
 }
 
 type AddTileLayerRequest = {
@@ -113,7 +140,7 @@ type RemoveLayerRequest = {
 }
 
 type MoveLayerRequest = {
-    type: "RemoveLayer",
+    type: "MoveLayer",
     layerType: "tile" | "shape",
     src: number,
     dst: number
