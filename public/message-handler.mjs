@@ -1,4 +1,4 @@
-class MessageHandler {
+export class MessageHandler {
     constructor(url) {
         this.url = url;
         this.handle = 0;
@@ -10,6 +10,13 @@ class MessageHandler {
             this.ws.addEventListener("open", event => {
                 resolve();
             });
+        });
+    }
+
+    onMessage(callback) {
+        this.ws.addEventListener("message", message => {
+            let data = JSON.parse(message.data);
+            callback(data);
         });
     }
 

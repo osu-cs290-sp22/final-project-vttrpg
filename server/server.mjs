@@ -118,15 +118,17 @@ wss.on("connection", (ws, req) => {
                 patchSession(session, parsedData);
                 ws.send(JSON.stringify({ success: true,
                     handle: parsedData.handle }));
+                session.members.forEach(member => {
+                    if (member.ws != ws) {
+                        member.ws.send(JSON.stringify({ fromServer: true, ...parsedData }))
+                    }
+                });
                 break;
         }
     });
 });
 
 const app = express();
-
-// app.use("/session", express.json());
-// app.use("/battlemap", express.json());
 
 app.use(express.static('public'));
 
@@ -135,76 +137,5 @@ app.get("/game/*", async (req, res) => {
 });
 
 let activeSessions = new Map();
-
-// app.post("/battlemap", (req, res) => {
-//     if (!validate.Battlemap(req.body)) {
-//         res.statusCode = 400;
-//         res.end();
-//         return;
-//     }
-//     battlemapWrite(req.body);
-// });
-
-// app.post("/session", (req, res) => {
-//     let sessionID = uuidv4();
-//     if (!validate.SessionCreateInfo(req.body)) {
-//         res.statusCode = 400;
-//         res.end();
-//         return;
-//     }
-//     activeSessions.set(sessionID, {
-//         password: req.body.password,
-//         dmPassword: req.body.dmPassword,
-//         battlemaps: []
-//     });
-//     res.end(sessionID);
-// });
-
-// app.get("/session/:sessionID/battlemap/:index", (req, res) => {
-//     let sessionID = req.params.sessionID;
-//     let index = req.params.index;
-
-//     // ensure that session is valid
-//     if (!activeSessions.has(sessionID)) {
-//         res.statusCode = 404;
-//         res.end();
-//         return;
-//     }
-
-//     let session = activeSessions.get(sessionID);
-
-//     // ensure that battlemap retrieved is correct
-//     if (session.battlemaps[index] == undefined) {
-//         res.statusCode = 404;
-//         res.end();
-//         return;
-//     }
-
-//     // retrieve battlemap
-//     res.statusCode = 200;
-//     res.end(JSON.stringify(session.battlemaps[index]));
-// });
-
-// app.post("/session/:sessionID/battlemap", (req, res) => {
-//     // ensure that body contains a battlemap object
-//     if (!validate.Battlemap(req.body)) {
-//         res.statusCode = 400;
-//         res.end();
-//         return;
-//     }
-    
-//     let sessionID = req.params.sessionID;
-
-//     // ensure that session is valid
-//     if (!activeSessions.has(sessionID)) {
-//         res.statusCode = 404;
-//         res.end();
-//         return;
-//     }
-
-//     let session = activeSessions.get(sessionID);
-//     session.battlemaps.push(req.body);
-//     res.end(JSON.stringify({ index: session.battlemaps.length - 1 })); 
-// });
 
 app.listen(process.env.PORT || 3000);
