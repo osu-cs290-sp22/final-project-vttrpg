@@ -17,11 +17,11 @@ function patchBattlemap(battlemap, patch) {
     switch (patch.type) {
     case "SetTiles":
         patch.tiles.forEach(tile => {
-            let layer = battlemap.tileLayers[tile.layer];
+            let layer = battlemap.tileLayers[tile.layerId];
             if (    layer
                  && isBetween(tile.x, 0, layer.width - 1)
                  && isBetween(tile.y, 0, layer.height - 1)) {
-                layer.images[tile.y][tile.x] = tile.tile
+                layer.images[tile.y][tile.x] = tile.tile;
             }
         });
         break;

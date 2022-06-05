@@ -113,21 +113,13 @@ export class CanvasController {
         this.ctx.drawImage(this.tileLayerCanvas, 0, 0);
 
         dragger.applyTransforms(this.canvas, this.ctx);
-        // this.shapeLayers.forEach(l => {
-        //     l.drawRegion(
-        //         this.ctx,
-        //         clamp(Math.floor(corner1.x), 0, l.width),
-        //         clamp(Math.floor(corner1.y), 0, l.height),
-        //         clamp(Math.ceil(corner2.x), 0, l.width),
-        //         clamp(Math.ceil(corner2.y), 0, l.height)
-        //     );
-        // });
+        
         this.updatePosition(dragger);
     }
 
-
     // draws a single frame
-    draw(dragger) {
+    draw(dragger, force) {
+        if (force) this.redrawNeeded = true;
         if (
             !this.redrawNeeded 
             && this.pastPosition.x == dragger.position.x 
@@ -148,17 +140,6 @@ export class CanvasController {
         let repeat = this.redrawNeeded ? 16 : (dragger.scale > 20 ? 4 : 1);
 
         for (let i = 0; i < repeat; i++) {
-            //this.layers.forEach(l => {
-                // l.drawRegionDithered(
-                //     this.tileLayerCtx,
-                //     clamp(Math.floor(corner1.x), 0, l.width),
-                //     clamp(Math.floor(corner1.y), 0, l.height),
-                //     clamp(Math.ceil(corner2.x), 0, l.width),
-                //     clamp(Math.ceil(corner2.y), 0, l.height),
-                //     this.ditherIndex % 16
-                // );
-            //});
-            //this.ditherIndex++;
             this.gridDrawer.drawRegionOfTilesDithered(
                 this.tileLayerCtx,
                 Math.floor(corner1.x),

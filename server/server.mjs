@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import { validate } from "./validate/schema.mjs"
 import * as fs from "fs/promises";
 import { patchSession } from "../public/patch.mjs";
+import * as bodyParser from "body-parser";
+import * as path from "path";
 
 
 const wss = new WebSocketServer({ port: process.env.WS_PORT || 3001 });
@@ -130,9 +132,24 @@ const app = express();
 
 app.use(express.static('public'));
 
+app.get("/battlemap/*", express.static('./'));
+
 app.get("/game/*", async (req, res) => {
     res.end(await fs.readFile("public/index.html"));
 });
+
+app.post("/battlemap/:battlemapName", bodyParser.default.text());
+app.post("/battlemap/:battlemapName", async (req, res) => {
+    let filePath = path.join(process.cwd(), req.url);
+    try {
+        let exists = await fs.access(filePath);
+        res.statusCode = 400;
+        res.end();
+    } catch {
+        await fs.writeFile(filePath, req.body);
+        res.end();
+    }
+})
 
 let activeSessions = new Map();
 

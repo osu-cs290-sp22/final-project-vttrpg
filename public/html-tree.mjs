@@ -1,6 +1,6 @@
 
 // creates a tree of HTML from a JavaScript object
-function makeHTMLTree(tree) {
+export function makeHTMLTree(tree) {
     if (!tree.tag) throw new Error("Cannot make an HTML tree without a tag!");
     let elem = document.createElement(tree.tag);
     if (tree.attr && tree.attr instanceof Object) {

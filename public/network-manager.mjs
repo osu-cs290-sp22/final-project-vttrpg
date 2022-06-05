@@ -2,8 +2,10 @@ import { patchSession } from "/patch.mjs";
 import { MessageHandler } from "/message-handler.mjs"
 
 export class NetworkManager {
-    constructor() {
-        this.session = {};
+    constructor(canvasController, dragger, session) {
+        this.cc = canvasController;
+        this.dragger = dragger;
+        this.session = session;
     }
 
     // asynchronous initialization (b/c constructors can't be async)
@@ -13,6 +15,7 @@ export class NetworkManager {
         this.mh.onMessage(msg => {
             if (msg.fromServer) {
                 patchSession(this.session, msg);
+                this.cc.draw(this.dragger, true);
             }
         });
     }

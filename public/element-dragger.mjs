@@ -29,8 +29,6 @@ export class ElementDragger {
         elem.addEventListener("wheel", this.wheelHandler);
     }
 
-    
-
     // apply the transformations of the dragger to a given canvas
     applyTransforms(c, ctx) {
         ctx.translate(c.width / 2, c.height / 2);
