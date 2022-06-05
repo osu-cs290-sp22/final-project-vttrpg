@@ -1,0 +1,59 @@
+
+[
+    {
+
+        "TokenName": "Token name",
+        "TokenNickname": "Nickname",
+        "TokenDescription": "Description",
+        "TokenBar": [
+
+            {
+                "BarColorValue": "#13eb48",
+                "BarName": "Bar1",
+                "AttributeName": "Attribute Name"
+        
+            },
+            {
+                "BarColorValue": "#136ceb",
+                "BarName": "Bar2",
+                "AttributeName": "Attribute Name"
+            },
+            {
+                "BarColorValue": "#eb133a",
+                "BarName": "Bar3",
+                "AttributeName": "Attribute Name"
+            }
+
+        ]
+
+    },
+
+    {
+
+        "TokenName": "Token name",
+        "TokenNickname": "Nickname",
+        "TokenDescription": "Description",
+        "TokenBar": [
+
+            {
+                "BarColorValue": "#13eb48",
+                "BarName": "Bar1",
+                "AttributeName": "Attribute Name"
+        
+            },
+            {
+                "BarColorValue": "#136ceb",
+                "BarName": "Bar2",
+                "AttributeName": "Attribute Name"
+            },
+            {
+                "BarColorValue": "#eb133a",
+                "BarName": "Bar3",
+                "AttributeName": "Attribute Name"
+            }
+
+        ]
+
+    }
+
+]

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="/style.css" media="screen">
+<body>
+    <div id="token-backdrop" class="hidden">
+        <div class="token-header">
+            <h3>Token Menu</h3>
+            <button type="button" class="token-close">&times;</button>
+        </div>
+        <div class=token-body>
+            
+            {{#each AllTokens}}
+
+                {{> Token}}
+
+            {{/each}}
+    
+        </div>
+    </div>
+</body>
+
+</html>
