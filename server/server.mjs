@@ -119,9 +119,7 @@ wss.on("connection", (ws, req) => {
                 ws.send(JSON.stringify({ success: true,
                     handle: parsedData.handle }));
                 session.members.forEach(member => {
-                    if (member.ws != ws) {
-                        member.ws.send(JSON.stringify({ fromServer: true, ...parsedData }))
-                    }
+                    member.ws.send(JSON.stringify({ fromServer: true, ...parsedData }));
                 });
                 break;
         }

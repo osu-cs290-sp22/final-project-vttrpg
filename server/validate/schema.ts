@@ -31,21 +31,23 @@ type Token = {
 type BattlemapTileLayer = {
     images: number[][] // 2D array of indexes into the imagePalette array
     width: number,
-    height: number
+    height: number,
+    order: number
 }
 
 type BattlemapShapeLayer = {
     shapes: (Circle2 | Rect | Polyline)[],
-    isFogOfWar: boolean
+    isFogOfWar: boolean,
+    order: number
 }
 
 type Battlemap = {
     imagePalette: string[], // all possible image URLs in the battlemap
     width: number, // width of battlemap in tiles
     height: number, // height of battlemap in tiles
-    tileLayers: BattlemapTileLayer[],
-    shapeLayers: BattlemapShapeLayer[],
-    tokens: Token[]
+    tileLayers: { [key: string]: BattlemapTileLayer },
+    shapeLayers: { [key: string]: BattlemapShapeLayer },
+    tokens: { [key: string]: Token }
 }
 
 type Session = {
@@ -111,42 +113,69 @@ type BattlemapRequest = {
         | AddImageToPaletteRequest
 }
 
+
+// TILES AND LAYERS
 type SetTilesRequest = {
     type: "SetTiles",
     tiles: ({
         x: number,
         y: number,
         tile: number,
-        layer: number
+        layerId: string
     })[]
 }
 
 type AddTileLayerRequest = {
     type: "AddTileLayer",
-    position: number,
+    layerId: string,
     layer: BattlemapTileLayer
 }
 
 type AddShapeLayerRequest = {
     type: "AddShapeLayer",
-    position: number,
+    layerId: string,
     layer: BattlemapShapeLayer
 }
 
 type RemoveLayerRequest = {
     type: "RemoveLayer",
     layerType: "tile" | "shape",
-    position: number
+    layerId: string,
 }
 
 type MoveLayerRequest = {
     type: "MoveLayer",
     layerType: "tile" | "shape",
-    src: number,
-    dst: number
+    src: string,
+    dst: string
 }
+
+type ReorderLayerRequest = {
+    type: "ReorderLayer",
+    layerType: "tile" | "shape",
+    layerId: string,
+    order: number
+}
+
+
 
 type AddImageToPaletteRequest = {
     type: "AddImageToPalette",
     image: string
+}
+
+
+
+
+
+// TOKENS 
+type SetTokenRequest = {
+    type: "AddToken",
+    token: Token,
+    tokenId: string
+}
+
+type RemoveTokenRequest = {
+    type: "RemoveToken",
+    tokenId: string
 }

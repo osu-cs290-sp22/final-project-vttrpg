@@ -73,6 +73,84 @@ export class NetworkManager {
             }
         };
         patchSession(this.session, req);
-        this.mh.send(req, true);
+        await this.mh.send(req, true);
+    }
+
+    async addTileLayer(battlemap, layerId, layer) {
+        let req = {
+            type: "Battlemap",
+            battlemap,
+            request: {
+                type: "AddTileLayer",
+                layer, layerId
+            }
+        };
+        patchSession(this.session, req);
+        await this.mh.send(req, true);
+    }
+
+    async addShapeLayer(battlemap, layer) {
+        let req = {
+            type: "Battlemap",
+            battlemap,
+            request: {
+                type: "AddShapeLayer",
+                layer
+            }
+        };
+        patchSession(this.session, req);
+        await this.mh.send(req, true);
+    }
+
+    async removeLayer(battlemap, layerType, layerId) {
+        let req = {
+            type: "Battlemap",
+            battlemap,
+            request: {
+                type: "RemoveLayer",
+                layerType, layerId
+            }
+        };
+        patchSession(this.session, req);
+        await this.mh.send(req, true);
+    }
+
+    async moveLayer(battlemap, layerType, src, dst) {
+        let req = {
+            type: "Battlemap",
+            battlemap,
+            request: {
+                type: "MoveLayer",
+                layerType, src, dst
+            }
+        };
+        patchSession(this.session, req);
+        await this.mh.send(req, true);
+    }
+
+    async reorderLayer(battlemap, layerType, layerId, order) {
+        let req = {
+            type: "Battlemap",
+            battlemap,
+            request: {
+                type: "MoveLayer",
+                layerType, layerId, order
+            }
+        };
+        patchSession(this.session, req);
+        await this.mh.send(req, true);
+    }
+
+    async addImageToPalette(battlemap, image) {
+        let req = {
+            type: "Battlemap",
+            battlemap,
+            request: {
+                type: "AddImageToPalette",
+                image
+            }
+        };
+        patchSession(this.session, req);
+        await this.mh.send(req, true);
     }
 }

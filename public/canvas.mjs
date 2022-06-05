@@ -107,6 +107,27 @@ class ShapeLayer {
     }
 }
 
+async function testingCode() {
+    let createdSession = await nm.createSession("adrians session", "asdf", "zxcv");
+    let joinedSession = await nm.joinSession("player", createdSession.id, "asdf", "ADRIAN");
+    let battlemapAddedStatus = await nm.addBattlemap({
+        imagePalette: [],
+        width: 2,
+        height: 2,
+        tileLayers: {},
+        shapeLayers: {},
+        tokens: {}
+    });
+    nm.addImageToPalette(0, "/test1.png");
+    nm.addImageToPalette(0, "/test2.png");
+    console.log(nm.addTileLayer(0, 0, {
+        width: 2, height: 2, images: [[0, 1], [1, 0]], order: 0
+    }));
+    controller.gridDrawer.activeBattlemap = 0;
+}
+
+
+
 // test (I will remove/modify later)
 async function testMain() {
 
@@ -117,36 +138,15 @@ async function testMain() {
     // html element dragger
     let dragger = new ElementDragger(c);
 
-    // let session = {
-    //     name: "Test Session",
-    //     battlemaps: [
-    //         {
-    //             imagePalette: ["/test1.png", "/test2.png", "/icons/Icon 1.png"],
-    //             width: 4,
-    //             height: 4,
-    //             tileLayers: [
-    //                 {
-    //                     images: [
-    //                         [0, 1, 2, 1],
-    //                         [2, 1, 0, 1],
-    //                         [0, 1, 0, 1],
-    //                         [2, 1, 1, 2],
-    //                     ],
-    //                     width: 4,
-    //                     height: 4
-    //                 }
-    //             ],
-    //             shapeLayers: [],
-    //             tokens: []
-    //         }
-    //     ]
-    // }
     let session = window.nm.session;
 
     // thing that draws stuff on the canvas
     window.controller = new CanvasController({ canvas: c, session });
     
     controller.gridDrawer.activeBattlemap = -1;
+
+    // test code
+    await testingCode();
 
     async function loop() {
         await controller.draw(dragger);
