@@ -1,0 +1,80 @@
+/* buttons and side bars*/
+.buttonTool {
+    flex: 1 0 50px;
+
+    box-shadow: 3px 3px 6px rgb(0 0 0 / 45%);
+    border-radius: 12%;
+    margin: 6px;
+   
+    background: rgb(73, 73, 73);
+    color: rgb(253, 253, 253);
+    border: solid 0px;
+
+    transition: all ease-in-out 0.2s;
+
+    padding: 10px;
+   
+    right: 16px;
+    bottom: 20px;
+    font-size: 24px;
+}
+
+.buttonTool:hover {
+    cursor: pointer;
+    background: #222222;
+}
+
+.buttonToolSide:hover {
+    cursor: pointer;
+    background: #222222;
+}
+
+.buttonToolSide {
+    flex: 0 1 10px;
+
+    box-shadow: 3px 3px 6px rgb(0 0 0 / 45%);
+    border-radius: 12%;
+    margin: 6px;
+
+    height: 40px;
+    width: 40px;
+    transition: all ease-in-out 0.2s;
+    
+    font-size: 20px;
+    background: rgb(73, 73, 73);
+    color: rgb(253, 253, 253);
+    border: solid 0px;
+
+    padding: 10px;
+}
+
+#DMTools {
+    display: flex;
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translate(-50%);
+    position: absolute;
+    margin: auto;
+}
+
+#sideBar {
+
+    display: flex;
+
+    align-items: flex-start;
+    flex-direction: column;
+    position: absolute;
+    left: 30px;
+    top: 2px;
+   
+    transform: translate(-50%);
+    position: absolute;
+    margin: auto;
+
+}
+
+/* a class that can make elements hidden, can be added/removed in js*/
+.hidden {
+    visibility: hidden;
+}
