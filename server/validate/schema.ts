@@ -24,8 +24,14 @@ type Token = {
     x: number,
     y: number,
     image: string,
-    stats: number[]
-    maxStats: number[]
+    TokenName: string,
+    TokenNickname: string,
+    TokenDescription: string,
+    TokenBar: ({
+        BarColorValue: string,
+        BarName: string,
+        AttributeName: string
+    })[]
 }
 
 type BattlemapTileLayer = {

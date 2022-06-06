@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.mjs",
-    "build": "handlebars handle/partials/bar.handlebars -f public/BarTemplate.js" 
+    "build": "node build.mjs"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "ajv": "^8.11.0",
     "body-parser": "^1.20.0",
     "express": "^4.18.1",
+    "handlebars": "^4.7.7",
     "tslib": "^2.4.0",
     "typescript-json-schema": "^0.53.1",
     "uuid": "^8.3.2",
