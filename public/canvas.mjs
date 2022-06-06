@@ -2,6 +2,7 @@ import { NetworkManager } from "/network-manager.mjs";
 import { ImageCache } from "/image-cache.mjs";
 import { ElementDragger } from "/element-dragger.mjs";
 import { CanvasController } from "/canvas-controller.mjs"
+import { TokenDrawer } from "/token-drawer.mjs"
 
 let canvas = document.getElementById("main-canvas");
 
@@ -57,6 +58,8 @@ async function testMain() {
     await window.nm.init();
 
     controller.gridDrawer.activeBattlemap = -1;
+
+    window.td = new TokenDrawer(session, dragger);
 
     // test code
     //await testingCode();
@@ -114,6 +117,8 @@ async function testMain() {
                 await getBattlemapFromUser();
             }
             controller.gridDrawer.activeBattlemap = 0;
+            td.activeBattlemap = 0;
+            td.setTokens();
         }
     }
 
