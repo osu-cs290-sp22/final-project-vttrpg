@@ -176,7 +176,7 @@ type AddImageToPaletteRequest = {
 
 // TOKENS 
 type SetTokenRequest = {
-    type: "AddToken",
+    type: "SetToken",
     token: Token,
     tokenId: string
 }

@@ -132,6 +132,16 @@ const app = express();
 
 app.use(express.static('public'));
 
+app.get("/battlemap", async (req, res) => {
+    let fileNames = await fs.readdir("./battlemap");
+    res.end(JSON.stringify(
+        {
+            maps: fileNames.map(e => {
+                return { name: path.basename(e, ".json") };
+            })
+        }
+    ));
+});
 app.get("/battlemap/*", express.static('./'));
 
 app.get("/game/*", async (req, res) => {

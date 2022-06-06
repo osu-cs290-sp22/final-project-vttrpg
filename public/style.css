@@ -78,3 +78,13 @@
 .hidden {
     visibility: hidden;
 }
+
+.map-select {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    z-index: 2;
+    top: 25%;
+    left: 25%;
+    border: 1px solid black;
+}

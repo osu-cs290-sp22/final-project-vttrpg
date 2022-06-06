@@ -156,4 +156,34 @@ export class NetworkManager {
         patchSession(this.session, req);
         await this.mh.send(req, true);
     }
+
+
+
+
+    //token-related requests
+    async setToken(battlemap, tokenId, token) {
+        let req = {
+            type: "Battlemap",
+            battlemap,
+            request: {
+                type: "SetToken",
+                tokenId, token
+            }
+        };
+        patchSession(this.session, req);
+        await this.mh.send(req, true);
+    }
+
+    async removeToken(battlemap, tokenId) {
+        let req = {
+            type: "Battlemap",
+            battlemap,
+            request: {
+                type: "RemoveToken",
+                tokenId, token
+            }
+        };
+        patchSession(this.session, req);
+        await this.mh.send(req, true);
+    }
 }

@@ -1,4 +1,4 @@
-{"1":function(container,depth0,helpers,partials,data) {
+Handlebars.partials["Token"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -26,4 +26,4 @@
     + " </label>\r\n    <textarea id=\"token-description-input\"></textarea>\r\n</div>\r\n<div id=\"bars\">\r\n    \r\n"
     + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"TokenBar") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":17,"column":4},"end":{"line":21,"column":13}}})) != null ? stack1 : "")
     + "\r\n\r\n    <h3 class=\"Token-Controller\">Controlled by: </h3>\r\n    <label for=\"visibletoplayers\">Visible to Players:</label>\r\n    <input type=\"checkbox\" id=\"visible-to-players\">\r\n\r\n</div>\r\n";
-},"usePartial":true,"useData":true}
+},"usePartial":true,"useData":true});

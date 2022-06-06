@@ -7,36 +7,33 @@ let canvas = document.getElementById("main-canvas");
 
 canvas.oncontextmenu = () => false;
 
-
-window.addBattlemapToSession =  async function() {
-    let joinedSession = await nm.joinSession("player", createdSession.id, "asdf", "ADRIAN");
-    let battlemapAddedStatus = await nm.addBattlemap({
-        imagePalette: [],
-        width: 2,
-        height: 2,
-        tileLayers: {},
-        shapeLayers: {},
-        tokens: {}
-    });
-    nm.addImageToPalette(0, "/test1.png");
-    nm.addImageToPalette(0, "/test2.png");
-    let images = [];
-    for (let y = 0; y < 32; y++) {
-        images.push([]);
-        for (let x = 0; x < 32; x++) {
-            images[y].push(0);
-        }
-    }
-    console.log(nm.addTileLayer(0, "0", {
-        width: 32, height: 32, images, order: 0
-    }));
-    controller.gridDrawer.activeBattlemap = 0;
-    return createdSession;
+async function fetchJSON(url) {
+    return await ((await fetch(url)).json());
 }
-window.joinSession = async function(id) {
-    let joinedSession = await nm.joinSession("player", id, "asdf", "ADRIAN222");
-    controller.gridDrawer.activeBattlemap = 0;
 
+function addHTMLStringToDiv(htmlString) {
+    let container = document.createElement("div");
+    container.innerHTML = htmlString;
+    return container;
+}
+
+async function getBattlemapFromUser() {
+    let battlemaps = await fetchJSON(window.location.origin + "/battlemap");
+    let mapSelect = addHTMLStringToDiv(Handlebars.partials.mapSelect(battlemaps));
+    
+    document.body.appendChild(mapSelect);
+    return new Promise((resolve, reject) => {
+        Array.from(document.getElementById("map-list").children).forEach(listItem => {
+            listItem.children[0].addEventListener("click", async (e) => {
+                let battlemapToLoad = e.currentTarget.innerText + ".json";
+                let battlemap = await fetchJSON(
+                    window.location.origin + "/battlemap/" + battlemapToLoad);
+                await nm.addBattlemap(battlemap);
+                document.body.removeChild(mapSelect);
+                resolve();
+            })
+        });
+    });
 }
 
 
@@ -112,6 +109,10 @@ async function testMain() {
             let password = window.prompt("Enter password.");
             let result = await nm.joinSession(joinType, splitPath[2], password, username);
             window.alert(JSON.stringify(result));
+            // controller.gridDrawer.activeBattlemap = 0;
+            if (controller.session.battlemaps.length == 0) {
+                await getBattlemapFromUser();
+            }
             controller.gridDrawer.activeBattlemap = 0;
         }
     }
@@ -119,7 +120,6 @@ async function testMain() {
     if (window.location.pathname == "/") {
 
         // TODO: replace with a GUI
-        console.log(splitPath);
         let sessionName = window.prompt("Create new session: Session name:");
         let playerPassword = window.prompt("Player password:");
         let dmPassword = window.prompt("DM password:");

@@ -1,4 +1,4 @@
-{"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+Handlebars.partials["bar"] = Handlebars.template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -13,4 +13,4 @@
     + "</h3>\r\n        <h3>"
     + alias4(((helper = (helper = lookupProperty(helpers,"AttributeName") || (depth0 != null ? lookupProperty(depth0,"AttributeName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"AttributeName","hash":{},"data":data,"loc":{"start":{"line":5,"column":12},"end":{"line":5,"column":29}}}) : helper)))
     + "</h3>\r\n    </div>\r\n    <input type=\"number\" id=\"bar-current\">\r\n    <label for=\"bar-max\">/</label>\r\n    <input type=\"number\" id=\"bar-max\">\r\n    <input type=\"text\" id=\"bar-name\"></textarea>\r\n</div>\r\n";
-},"useData":true}
+},"useData":true});

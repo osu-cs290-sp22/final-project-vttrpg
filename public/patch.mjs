@@ -4,6 +4,7 @@ export function patchSession(session, patch) {
         session.battlemaps.push(patch.battlemap);
         break;
     case "Battlemap":
+        if (!session.battlemaps[patch.battlemap]) break;
         patchBattlemap(session.battlemaps[patch.battlemap], patch.request);
         break;
     }
@@ -53,6 +54,16 @@ function patchBattlemap(battlemap, patch) {
 
     case "AddImageToPalette":
         battlemap.imagePalette.push(patch.image);    
+        break;
+    
+    
+    
+    case "SetToken":
+        battlemap.tokens[patch.tokenId] = token;
+        break;
+
+    case "RemoveToken":
+        delete battlemap.tokens[patch.tokenId];
         break;
     }
 }
