@@ -1,10 +1,17 @@
 let tokensContainer = document.getElementById("token-list");
 
+function addHTMLStringToDiv(htmlString) {
+    let container = document.createElement("div");
+    container.innerHTML = htmlString;
+    return container;
+}
+
 export class TokenDrawer {
     constructor(session, dragger) {
         this.session = session;
         this.dragger = dragger;
         this.activeBattlemap = -1;
+        this.currentlySetTokenMenu = undefined;
     }
 
     setTokens() {
@@ -31,6 +38,18 @@ export class TokenDrawer {
             moveListener();
             this.dragger.addOnMove(moveListener);
             tokensContainer.appendChild(img);
+            img.addEventListener("click", e => {
+                if (this.currentlySetTokenMenu) {
+                    document.body.removeChild(this.currentlySetTokenMenu);
+                }
+                let tokenMenu = addHTMLStringToDiv(Handlebars.partials.Token(token));
+                tokenMenu.style.position = "absolute";
+                tokenMenu.style.bottom = "0";
+                tokenMenu.style.height = "50%";
+                tokenMenu.style.zIndex = "6";
+                document.body.appendChild(tokenMenu);
+                this.currentlySetTokenMenu = tokenMenu;
+            });
         });
     }
 }
