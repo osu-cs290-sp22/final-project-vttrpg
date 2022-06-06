@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.mjs",
-    "build": "node build.mjs" 
+    "build": "handlebars handle/partials/bar.handlebars -f public/BarTemplate.js" 
   },
   "repository": {
     "type": "git",

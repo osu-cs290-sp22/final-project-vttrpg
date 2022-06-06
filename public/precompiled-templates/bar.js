@@ -6,8 +6,8 @@ Handlebars.partials["bar"] = Handlebars.template({"compiler":[8,">= 4.3.0"],"mai
         return undefined
     };
 
-  return "<div class=\"bar\">\r\n    <div class=\"bar-header\">\r\n        <input type=\"color\" id=\"barcolor\" name=\"barcolor\" value="
-    + alias4(((helper = (helper = lookupProperty(helpers,"BarColorValue") || (depth0 != null ? lookupProperty(depth0,"BarColorValue") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"BarColorValue","hash":{},"data":data,"loc":{"start":{"line":3,"column":64},"end":{"line":3,"column":81}}}) : helper)))
+  return "<div class=\"bar\">\r\n    <div class=\"bar-header\">\r\n        <input type=\"color\" id=\"bar1color\" name=\"bar1color\" value="
+    + alias4(((helper = (helper = lookupProperty(helpers,"BarColorValue") || (depth0 != null ? lookupProperty(depth0,"BarColorValue") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"BarColorValue","hash":{},"data":data,"loc":{"start":{"line":3,"column":66},"end":{"line":3,"column":83}}}) : helper)))
     + ">\r\n        <h3>"
     + alias4(((helper = (helper = lookupProperty(helpers,"BarName") || (depth0 != null ? lookupProperty(depth0,"BarName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"BarName","hash":{},"data":data,"loc":{"start":{"line":4,"column":12},"end":{"line":4,"column":23}}}) : helper)))
     + "</h3>\r\n        <h3>"
