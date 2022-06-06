@@ -37,6 +37,34 @@ async function getBattlemapFromUser() {
     });
 }
 
+function doCreateSessionMenu() {
+    let createSessionMenu = addHTMLStringToDiv(Handlebars.partials.createsession());
+    document.body.appendChild(createSessionMenu);
+
+    let sessionNameInput = document.getElementById("session-name-input");
+    let passwordInput = document.getElementById("password-input");
+    let dmPasswordInput = document.getElementById("dm-password-input");
+    let createSessionButton = document.getElementById("create-session");
+
+    createSessionButton.addEventListener("click", async (e) => {
+        let createdSession = await nm.createSession(
+            sessionNameInput.value, passwordInput.value, dmPasswordInput.value
+        );
+        window.location.href = window.location.origin + "/game/" + createdSession.id;
+    });
+}
+
+function doJoinSessionMenu() {
+    let joinSessionMenu = addHTMLStringToDiv(Handlebars.partials.joinsession());
+    document.body.appendChild(joinSessionMenu);
+
+    let usernameInput = document.getElementById("username-input");
+    let passwordInput = document.getElementById("password-input");
+    let joinAsPlayerButton = document.getElementById("join-session-player");
+    let joinAsDMButton = document.getElementById("join-session-dm");
+
+    
+}
 
 
 // test (I will remove/modify later)
@@ -125,11 +153,12 @@ async function testMain() {
     if (window.location.pathname == "/") {
 
         // TODO: replace with a GUI
-        let sessionName = window.prompt("Create new session: Session name:");
-        let playerPassword = window.prompt("Player password:");
-        let dmPassword = window.prompt("DM password:");
-        let createdSession = await nm.createSession(sessionName, playerPassword, dmPassword);
-        window.location.href = window.location.origin + "/game/" + createdSession.id;
+        // let sessionName = window.prompt("Create new session: Session name:");
+        // let playerPassword = window.prompt("Player password:");
+        // let dmPassword = window.prompt("DM password:");
+        // let createdSession = await nm.createSession(sessionName, playerPassword, dmPassword);
+        // window.location.href = window.location.origin + "/game/" + createdSession.id;
+        doCreateSessionMenu();
     }
 
     loop();
