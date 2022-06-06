@@ -20,6 +20,12 @@ type Polyline = {
     points: { x: number, y: number }[]
 }
 
+type TokenBar = {
+    BarColorValue: string,
+    BarName: string,
+    AttributeName: string
+}
+
 type Token = {
     x: number,
     y: number,
@@ -27,11 +33,7 @@ type Token = {
     TokenName: string,
     TokenNickname: string,
     TokenDescription: string,
-    TokenBar: ({
-        BarColorValue: string,
-        BarName: string,
-        AttributeName: string
-    })[]
+    TokenBar: TokenBar[]
 }
 
 type BattlemapTileLayer = {

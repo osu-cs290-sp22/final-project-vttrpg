@@ -170,6 +170,7 @@ export class NetworkManager {
                 tokenId, token
             }
         };
+        console.log(req);
         patchSession(this.session, req);
         await this.mh.send(req, true);
     }

@@ -59,7 +59,7 @@ function patchBattlemap(battlemap, patch) {
     
     
     case "SetToken":
-        battlemap.tokens[patch.tokenId] = token;
+        battlemap.tokens[patch.tokenId] = patch.token;
         break;
 
     case "RemoveToken":

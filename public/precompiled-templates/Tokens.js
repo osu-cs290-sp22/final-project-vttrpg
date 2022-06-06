@@ -19,5 +19,5 @@ Handlebars.partials["Tokens"] = Handlebars.template({"1":function(container,dept
 
   return "\r\n<div id=\"token-backdrop\" class=\"hidden\">\r\n    <div class=\"token-header\">\r\n        <h3>Token Menu</h3>\r\n        <button type=\"button\" class=\"token-close\">&times;</button>\r\n    </div>\r\n    <div class=\"token-body\">\r\n        \r\n"
     + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"AllTokens") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":9,"column":8},"end":{"line":13,"column":17}}})) != null ? stack1 : "")
-    + "\r\n    </div>\r\n</div>";
+    + "\r\n    </div>\r\n    <button type=\"button\" class=\"token-submit\">Submite</button>\r\n</div>";
 },"usePartial":true,"useData":true});

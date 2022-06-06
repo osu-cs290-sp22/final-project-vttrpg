@@ -23,7 +23,7 @@ export class TokenDrawer {
             tokensContainer.removeChild(tokensContainer.lastElementChild);
 
         // load in all tokens
-        Object.values(this.session.battlemaps[this.activeBattlemap].tokens).forEach(token => {    
+        Object.entries(this.session.battlemaps[this.activeBattlemap].tokens).forEach(([tokenId, token]) => {    
             let img = document.createElement("img");
             img.src = token.image;
             img.style.position = "absolute";
@@ -38,7 +38,8 @@ export class TokenDrawer {
             moveListener();
             this.dragger.addOnMove(moveListener);
             tokensContainer.appendChild(img);
-            img.addEventListener("click", e => {
+            let imgClickListener = (e) => {
+            
                 if (this.currentlySetTokenMenu) {
                     document.body.removeChild(this.currentlySetTokenMenu);
                 }
@@ -49,7 +50,33 @@ export class TokenDrawer {
                 tokenMenu.style.zIndex = "6";
                 document.body.appendChild(tokenMenu);
                 this.currentlySetTokenMenu = tokenMenu;
-            });
+            
+                let submitButton = document.getElementById("token-submit");
+                submitButton.addEventListener("click", async (event) => {
+                    let tokenPatch = {
+                        TokenName: document.getElementById("token-name-input").value,
+                        TokenNickname: document.getElementById("token-nickname-input").value,
+                        TokenDescription: document.getElementById("token-description-input").value
+                    };
+
+                    Object.keys(tokenPatch).forEach(key => {
+                        if (tokenPatch[key] == "") {
+                            tokenPatch[key] = token[key];
+                        }
+                    });
+
+                    let newToken = {
+                        ...token,
+                        ...tokenPatch
+                    };
+                    
+                    console.log(newToken);
+                    await nm.setToken(this.activeBattlemap, tokenId, newToken);
+                    imgClickListener();
+                });
+            
+            }
+            img.addEventListener("click", imgClickListener);
         });
     }
 }
