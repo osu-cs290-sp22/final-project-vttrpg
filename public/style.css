@@ -75,35 +75,46 @@
 }
 
 /* a class that can make elements hidden, can be added/removed in js*/
-.hidden {
+/*.hidden {
     visibility: hidden;
 }
+*/
 
-.map-select {
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    z-index: 2;
-    top: 25%;
-    left: 25%;
-    border: 1px solid black;
+
+/* Styling for Token Menu by Jaaron Green */
+
+.token-close {
+    position: fixed;
+    right: 20px;
 }
 
-#decision{
-    display:block;
+.token-header {
+    display: flex;
+    flex-direction: row;
+
 }
-#join_game{
-    color: rgb(255, 255, 255);
-    font-size:50px;
-    background-color: rgb(238, 110, 110);
+
+.token-main {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    justify-content: space-between;
+
+}
+
+#bars {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.bar-header {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    gap: 130px;
     
 }
 
-#title{
-    font-size:100px;
-}
-#create_game{
-    color: rgb(255, 255, 255);
-    font-size:50px;
-    background-color: rgb(37, 108, 240)
-}
+
+
