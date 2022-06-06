@@ -88,3 +88,22 @@
     left: 25%;
     border: 1px solid black;
 }
+
+#decision{
+    display:block;
+}
+#join_game{
+    color: rgb(255, 255, 255);
+    font-size:50px;
+    background-color: rgb(238, 110, 110);
+    
+}
+
+#title{
+    font-size:100px;
+}
+#create_game{
+    color: rgb(255, 255, 255);
+    font-size:50px;
+    background-color: rgb(37, 108, 240)
+}
