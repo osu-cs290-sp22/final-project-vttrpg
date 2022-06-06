@@ -23,13 +23,14 @@ export class TokenDrawer {
             tokensContainer.removeChild(tokensContainer.lastElementChild);
 
         // load in all tokens
-        Object.entries(this.session.battlemaps[this.activeBattlemap].tokens).forEach(([tokenId, token]) => {    
+        let tokens = this.session.battlemaps[this.activeBattlemap].tokens;
+        Object.keys(tokens).forEach((tokenId) => {    
             let img = document.createElement("img");
-            img.src = token.image;
+            img.src = tokens[tokenId].image;
             img.style.position = "absolute";
             img.style.zIndex = 5;
             let moveListener = () => {
-                let pixelSpacePos = this.dragger.worldSpaceToPixelSpace(token.x, token.y, this.dragger.elem);
+                let pixelSpacePos = this.dragger.worldSpaceToPixelSpace(tokens[tokenId].x, tokens[tokenId].y, this.dragger.elem);
                 img.style.left = `${pixelSpacePos.x}px`;
                 img.style.top = `${pixelSpacePos.y}px`;
                 img.style.width = `${this.dragger.scale}px`;
@@ -42,8 +43,9 @@ export class TokenDrawer {
             
                 if (this.currentlySetTokenMenu) {
                     document.body.removeChild(this.currentlySetTokenMenu);
+                    this.currentlySetTokenMenu = undefined;
                 }
-                let tokenMenu = addHTMLStringToDiv(Handlebars.partials.Token(token));
+                let tokenMenu = addHTMLStringToDiv(Handlebars.partials.Token(tokens[tokenId]));
                 tokenMenu.style.position = "absolute";
                 tokenMenu.style.bottom = "0";
                 tokenMenu.style.height = "50%";
@@ -61,17 +63,17 @@ export class TokenDrawer {
 
                     Object.keys(tokenPatch).forEach(key => {
                         if (tokenPatch[key] == "") {
-                            tokenPatch[key] = token[key];
+                            tokenPatch[key] = tokens[tokenId][key];
                         }
                     });
 
                     let newToken = {
-                        ...token,
+                        ...(tokens[tokenId]),
                         ...tokenPatch
                     };
                     
                     console.log(newToken);
-                    await nm.setToken(this.activeBattlemap, tokenId, newToken);
+                    nm.setToken(this.activeBattlemap, tokenId, newToken);
                     imgClickListener();
                 });
             

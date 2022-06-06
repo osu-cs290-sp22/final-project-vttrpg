@@ -119,6 +119,8 @@ type BattlemapRequest = {
         | RemoveLayerRequest
         | MoveLayerRequest
         | AddImageToPaletteRequest
+        | SetTokenRequest
+        | RemoveTokenRequest;
 }
 
 
