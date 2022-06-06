@@ -1,10 +1,11 @@
-    <div id="image_selector_modal">
-        <div class="image_selector_header">
-            <h2>Select an Image to draw with</h2>
-        </div>
-    <div id="token_image_container">
-        {{#each images}}
-        <img class="token_image" src={{image}} width="64" height= "64">
-        {{/each}}
+<div id="image_selector_modal"  class="dialog">
+    <div class="image_selector_header">
+        <h2>Select an Image to draw with</h2>
     </div>
-    </div>
+<div id="token_image_container">
+    {{#each images}}
+    <img class="token_image" src={{image}} width="64" height= "64">
+    {{/each}}
+</div>
+</div>
+<button id="close-image-selector">Close</button>
