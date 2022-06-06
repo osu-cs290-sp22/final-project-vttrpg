@@ -15,12 +15,9 @@ export let validate = {};
 // );
 
 [
-    "SessionRequest",
+    "SessionCreateInfo", 
     "Battlemap", 
     "Session", 
-    "GetSessionRequest",
-    "CreateSessionRequest",
-    "EndSessionRequest",
     "JoinSessionRequest",
     "AddBattlemapRequest",
     "BattlemapRequest"

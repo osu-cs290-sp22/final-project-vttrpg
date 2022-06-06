@@ -2,26 +2,26 @@
 [
     {
 
-        "TokenName": "Token name",
-        "TokenNickname": "Nickname",
-        "TokenDescription": "Description",
+        "TokenName": "Hess",
+        "TokenNickname": "The CS God",
+        "TokenDescription": "Almighty CS God who will give us all an A on this project",
         "TokenBar": [
 
             {
                 "BarColorValue": "#13eb48",
                 "BarName": "Bar1",
-                "AttributeName": "Attribute Name"
+                "AttributeName": "html"
         
             },
             {
                 "BarColorValue": "#136ceb",
                 "BarName": "Bar2",
-                "AttributeName": "Attribute Name"
+                "AttributeName": "js"
             },
             {
                 "BarColorValue": "#eb133a",
                 "BarName": "Bar3",
-                "AttributeName": "Attribute Name"
+                "AttributeName": "css"
             }
 
         ]
