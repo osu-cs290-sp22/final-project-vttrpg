@@ -19,14 +19,25 @@ export class ElementDragger {
                     y: this.position.y - e.movementY / this.scale
                 };
             }
+            this.onMoveCallbacks.forEach(callback => callback());
         }
+        this.onMoveCallbacks = [];
         this.wheelHandler = e => {
             this.scale *= (1 + 0.12 * Math.sign(e.deltaY));
+            this.onMoveCallbacks.forEach(callback => callback());
         }
         elem.addEventListener("mousedown", this.mouseDownHandler);
         elem.addEventListener("mouseup", this.mouseUpHandler);
         elem.addEventListener("mousemove", this.mouseMoveHandler);
         elem.addEventListener("wheel", this.wheelHandler);
+    }
+
+    addOnMove(callback) {
+        this.onMoveCallbacks.push(callback);
+    }
+
+    removeOnMove(callback) {
+        this.onMoveCallbacks = this.onMoveCallbacks.filter(c => c !== callback);
     }
 
     // apply the transformations of the dragger to a given canvas
@@ -48,6 +59,16 @@ export class ElementDragger {
         return { x, y };
     }
 
+    worldSpaceToPixelSpace(x, y, c) {
+        x -= this.position.x;
+        y -= this.position.y;
+        x *= this.scale;
+        y *= this.scale;
+        x += c.width / 2;
+        y += c.height / 2;
+        return { x, y };
+    }
+    
 
     // remove the dragger from an element
     disableDragging() {
