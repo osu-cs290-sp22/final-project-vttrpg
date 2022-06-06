@@ -1,8 +1,3 @@
-type SessionCreateInfo = {
-    name: string;
-    password: string;
-    dmPassword: string;
-};
 
 // called "Circle2" because apparently there's a namespace collision
 type Circle2 = {
@@ -25,30 +20,42 @@ type Polyline = {
     points: { x: number, y: number }[]
 }
 
+type TokenBar = {
+    BarColorValue: string,
+    BarName: string,
+    AttributeName: string
+}
+
 type Token = {
     x: number,
     y: number,
     image: string,
-    stats: number[]
-    maxStats: number[]
+    TokenName: string,
+    TokenNickname: string,
+    TokenDescription: string,
+    TokenBar: TokenBar[]
 }
 
 type BattlemapTileLayer = {
     images: number[][] // 2D array of indexes into the imagePalette array
+    width: number,
+    height: number,
+    order: number
 }
 
 type BattlemapShapeLayer = {
     shapes: (Circle2 | Rect | Polyline)[],
-    isFogOfWar: boolean
+    isFogOfWar: boolean,
+    order: number
 }
 
 type Battlemap = {
     imagePalette: string[], // all possible image URLs in the battlemap
     width: number, // width of battlemap in tiles
     height: number, // height of battlemap in tiles
-    tileLayers: BattlemapTileLayer[],
-    shapeLayers: BattlemapShapeLayer[],
-    tokens: Token[]
+    tileLayers: { [key: string]: BattlemapTileLayer },
+    shapeLayers: { [key: string]: BattlemapShapeLayer },
+    tokens: { [key: string]: Token }
 }
 
 type Session = {
@@ -63,11 +70,38 @@ type Session = {
 
 
 // server request types:
+type SessionRequest = 
+      GetSessionRequest
+    | CreateSessionRequest
+    | EndSessionRequest
+    | JoinSessionRequest
+    | AddBattlemapRequest
+    | BattlemapRequest;
+
+type GetSessionRequest = {
+    type: "GetSession",
+    handle: number
+}
+
+type CreateSessionRequest = {
+    type: "CreateSession",
+    name: string;
+    password: string;
+    dmPassword: string;
+    handle: number;
+};
+
+type EndSessionRequest = {
+    type: "EndSession"
+};
+
 type JoinSessionRequest = {
     type: "JoinSession",
     connectionType: "player" | "dm",
     session: string,
-    password: string
+    password: string,
+    name: string,
+    handle: number
 }
 
 type AddBattlemapRequest = {
@@ -85,41 +119,73 @@ type BattlemapRequest = {
         | RemoveLayerRequest
         | MoveLayerRequest
         | AddImageToPaletteRequest
+        | SetTokenRequest
+        | RemoveTokenRequest;
 }
 
+
+// TILES AND LAYERS
 type SetTilesRequest = {
     type: "SetTiles",
-    x: number[],
-    y: number[],
-    tile: number[]
+    tiles: ({
+        x: number,
+        y: number,
+        tile: number,
+        layerId: string
+    })[]
 }
 
 type AddTileLayerRequest = {
     type: "AddTileLayer",
-    position: number,
+    layerId: string,
     layer: BattlemapTileLayer
 }
 
 type AddShapeLayerRequest = {
     type: "AddShapeLayer",
-    position: number,
+    layerId: string,
     layer: BattlemapShapeLayer
 }
 
 type RemoveLayerRequest = {
     type: "RemoveLayer",
     layerType: "tile" | "shape",
-    position: number
+    layerId: string,
 }
 
 type MoveLayerRequest = {
-    type: "RemoveLayer",
+    type: "MoveLayer",
     layerType: "tile" | "shape",
-    src: number,
-    dst: number
+    src: string,
+    dst: string
 }
+
+type ReorderLayerRequest = {
+    type: "ReorderLayer",
+    layerType: "tile" | "shape",
+    layerId: string,
+    order: number
+}
+
+
 
 type AddImageToPaletteRequest = {
     type: "AddImageToPalette",
     image: string
+}
+
+
+
+
+
+// TOKENS 
+type SetTokenRequest = {
+    type: "SetToken",
+    token: Token,
+    tokenId: string
+}
+
+type RemoveTokenRequest = {
+    type: "RemoveToken",
+    tokenId: string
 }
