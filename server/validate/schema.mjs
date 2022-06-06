@@ -15,9 +15,12 @@ export let validate = {};
 // );
 
 [
-    "SessionCreateInfo", 
+    "SessionRequest",
     "Battlemap", 
     "Session", 
+    "GetSessionRequest",
+    "CreateSessionRequest",
+    "EndSessionRequest",
     "JoinSessionRequest",
     "AddBattlemapRequest",
     "BattlemapRequest"
@@ -29,5 +32,3 @@ export let validate = {};
 })
 
 //export const validateBattlemapCreateInfo = ajv.compile(battlemapCreateInfoSchema);
-
-
