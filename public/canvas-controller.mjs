@@ -112,6 +112,18 @@ export class CanvasController {
 
         this.ctx.drawImage(this.tileLayerCanvas, 0, 0);
 
+        if (this.session.battlemaps && this.session.battlemaps[0]) {
+            let battlemap = this.session.battlemaps[0];
+            let topLeft = dragger.worldSpaceToPixelSpace(0, 0, this.canvas);
+            let bottomRight = dragger.worldSpaceToPixelSpace(battlemap.width, battlemap.height, this.canvas);
+            
+            this.ctx.fillStyle = "black";
+            this.ctx.fillRect(topLeft.x - this.canvas.width, topLeft.y - this.canvas.width, this.canvas.width, bottomRight.y - topLeft.y + this.canvas.width*2);
+            this.ctx.fillRect(bottomRight.x, topLeft.y - this.canvas.width, this.canvas.width, bottomRight.y - topLeft.y + this.canvas.width*2);
+            this.ctx.fillRect(topLeft.x - 1, topLeft.y - this.canvas.width, bottomRight.x - topLeft.x + 2, this.canvas.width);
+            this.ctx.fillRect(topLeft.x - 1, bottomRight.y, bottomRight.x - topLeft.x + 2, this.canvas.width);
+        }
+
         dragger.applyTransforms(this.canvas, this.ctx);
         
         this.updatePosition(dragger);
