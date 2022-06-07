@@ -66,6 +66,13 @@ export class TokenDrawer {
                 document.body.appendChild(tokenMenu);
                 this.currentlySetTokenMenu = tokenMenu;
             
+                let closeButton = document.getElementById("token-close");
+                closeButton.addEventListener("click", event => {
+                    document.body.removeChild(this.currentlySetTokenMenu);
+                    this.currentlySetTokenMenu = undefined;
+                    activeTokenId = undefined;
+                });
+                
                 // make submit button submit token
                 let submitButton = document.getElementById("token-submit");
                 submitButton.addEventListener("click", async (event) => {

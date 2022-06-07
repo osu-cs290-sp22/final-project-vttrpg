@@ -189,6 +189,11 @@ async function testMain() {
                 tilePlaceIndex = i;
             });
         }); 
+
+        let closeButton = document.getElementById("close-image-selector");
+        closeButton.addEventListener("click", e => {
+            document.body.removeChild(imageSelector);
+        });
     }); 
 
     loop();
