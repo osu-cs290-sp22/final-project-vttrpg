@@ -12,11 +12,11 @@ export class TokenDrawer {
         this.dragger = dragger;
         this.activeBattlemap = -1;
         this.currentlySetTokenMenu = undefined;
-
+        this.tokenMoveListeners= [];
         document.getElementById("tokens").addEventListener("click", e => {
             nm.setToken(this.activeBattlemap, Math.random().toString(), {
                 x: 1, y: 1,
-                image: "/icons/Icon 1.png",
+                image: `/icons/Icon ${Math.floor(Math.random() * 16) + 1}.png`,
                 TokenName: "name",
                 TokenNickname: "nickname",
                 TokenDescription: "desc",
@@ -28,7 +28,8 @@ export class TokenDrawer {
         nm.mh.onMessage(msg => {
             if (
                 msg.type == "Battlemap" 
-                && msg.request.type == "SetToken"
+                && (msg.request.type == "SetToken"
+                || msg.request.type == "RemoveToken")
             ) {
                 this.setTokens();
             }
@@ -46,6 +47,10 @@ export class TokenDrawer {
         // load in all tokens
         let tokens = this.session.battlemaps[this.activeBattlemap].tokens;
         let activeTokenId = undefined;
+        this.tokenMoveListeners.forEach(listener => {
+            this.dragger.removeOnMove(listener);
+        });
+        this.tokenMoveListeners = [];
         Object.keys(tokens).forEach((tokenId) => {    
 
             // create images for tokens
@@ -67,6 +72,7 @@ export class TokenDrawer {
             };
             moveListener();
             this.dragger.addOnMove(moveListener);
+            this.tokenMoveListeners.push(moveListener);
 
             // open menu when token clicked
             tokensContainer.appendChild(img);
@@ -124,6 +130,15 @@ export class TokenDrawer {
                     // set token both locally and remotely
                     nm.setToken(this.activeBattlemap, tokenId, newToken);
                     imgClickListener();
+                });
+
+                let deleteButton = document.getElementById("delete-token");
+                deleteButton.addEventListener("click", async (event) => {
+                    nm.removeToken(this.activeBattlemap, tokenId);
+                    document.body.removeChild(this.currentlySetTokenMenu);
+                    this.currentlySetTokenMenu = undefined;
+                    activeTokenId = undefined;
+                    this.setTokens();
                 });
             
             }

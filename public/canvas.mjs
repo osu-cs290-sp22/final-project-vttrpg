@@ -36,6 +36,47 @@ async function getBattlemapFromUser() {
                 resolve();
             })
         });
+
+        document.getElementById("create-map-button")
+        .addEventListener("click", async (e) => {
+            let width =
+                Number(document.getElementById("map-width").value || "32");
+            let height =
+                Number(document.getElementById("map-height").value || "32");
+            
+            let images = [];
+            for (let y = 0; y < height; y++) {
+                images.push([]);
+                for (let x = 0; x < width; x++) {
+                    images[y].push(0);
+                }
+            }
+
+            let battlemap = {
+                "imagePalette": [
+                    "/icons/grass.jpeg",
+                    "/icons/bricks.jpeg",
+                    "/icons/off_limits.jpeg",
+                    "/icons/stone.jpeg",
+                    "/icons/tree.jpeg",
+                    "/icons/rob.8587b6b0e1fefd5dcca5.jpg"
+                ], width, height,
+                tileLayers: {
+                    "0": {
+                        images,
+                        width,
+                        height,
+                        order: 0
+                    }
+                },
+                shapeLayers: {},
+                tokens: {}
+            }
+
+            await nm.addBattlemap(battlemap);
+            document.body.removeChild(mapSelect);
+            resolve();
+        });
     });
 }
 
@@ -200,3 +241,30 @@ async function testMain() {
 }
 
 testMain();
+
+document.getElementById("maps").addEventListener("click", e => {
+    let saveMap = addHTMLStringToDiv(Handlebars.partials.savemap());
+    document.body.appendChild(saveMap);
+    let saveMapName = document.getElementById("savemap_name");
+    let saveMapButton = document.getElementById("savemap_button");
+    saveMapButton.addEventListener("click", async (e) => {
+        let err = false;
+        try {
+            let res = await fetch(`/battlemap/${saveMapName.value}.json`, {
+                method: "POST",
+                body: JSON.stringify(session.battlemaps[0])
+            });
+            err = res.status != 200;
+        } catch (err) {
+            console.log(err);
+            err = true;
+        }
+
+        if (err) {
+            window.alert("Unable to save battlemap.");
+        } else {
+            window.alert("Battlemap saved!");
+        }
+        document.body.removeChild(saveMap);
+    });
+});

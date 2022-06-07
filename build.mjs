@@ -19,3 +19,4 @@ compile("handle/partials/mapSelect.handlebars");
 compile("handle/partials/createsession.handlebars");
 compile("handle/partials/joinsession.handlebars");
 compile("handle/partials/imageselector.handlebars");
+compile("handle/partials/savemap.handlebars");

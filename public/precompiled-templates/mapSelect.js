@@ -19,5 +19,5 @@ Handlebars.partials["mapSelect"] = Handlebars.template({"1":function(container,d
 
   return "<div class=\"map-select placeholder-styling\" >\n    <h2>Select Map:</h2>\n    <ul id=\"map-list\">\n"
     + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"maps") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":4,"column":8},"end":{"line":8,"column":17}}})) != null ? stack1 : "")
-    + "    </ul>\n</div>";
+    + "    </ul>\n    <h2>Alternatively, Create a New Map</h2>\n    <input id=\"map-width\" type=\"number\" placeholder=\"Width\" min=\"1\" max=\"512\">\n    <input id=\"map-height\" type=\"number\" placeholder=\"Height\" min=\"1\" max=\"512\">\n    <button id=\"create-map-button\">Create</button>\n</div>";
 },"useData":true});

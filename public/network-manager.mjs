@@ -181,7 +181,7 @@ export class NetworkManager {
             battlemap,
             request: {
                 type: "RemoveToken",
-                tokenId, token
+                tokenId
             }
         };
         patchSession(this.session, req);
