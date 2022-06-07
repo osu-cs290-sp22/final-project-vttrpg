@@ -145,3 +145,12 @@ body {
     background-image:url('icons/gradient-colors.gif'); 
     background-repeat: repeat; 
 }
+
+
+
+.placeholder-styling {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    z-index: 10;
+}

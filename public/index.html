@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="./style.css" media="screen">
+        <link rel="stylesheet" href="/style.css" media="screen">
     </head>
     <body>
         <canvas style="width:100%; height:100%; position: absolute; top: 0; left: 0;" width=512 height=512 id="main-canvas"></canvas>
-        <script src="/loader.js"></script>
-        <script src="/canvas.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+        <script src="/precompiled-templates/imageselector.js"></script>
+        <script src="/precompiled-templates/mapSelect.js"></script>
+        <script src="/precompiled-templates/bar.js"></script>
+        <script src="/precompiled-templates/Token.js"></script>
+        <script src="/precompiled-templates/createsession.js"></script>
+        <script src="/precompiled-templates/joinsession.js"></script>
+        <script type="module" src="/canvas.mjs"></script>
 
         <!-- buttons for DM to use-->
-        <div calss = "DM" id = "DMTools"> 
+        <div class = "DM" id = "DMTools"> 
 
             
             <button class = buttonTool id = "upLayer" title="Move up layer"><span style="font-family:Wingdings">&#217;</span></button>
@@ -27,6 +32,9 @@
             <button class = buttonToolSide id = "ruler" title="Ruler"> <span style="font-family: 'Wingdings 3'">&#216;</span></button>
         </div>
 
+        <div id="token-list">
+
+        </div>
 
 
     </body>

@@ -6,6 +6,8 @@ import { TokenDrawer } from "/token-drawer.mjs"
 
 let canvas = document.getElementById("main-canvas");
 
+
+
 canvas.oncontextmenu = () => false;
 
 async function fetchJSON(url) {
@@ -54,7 +56,7 @@ function doCreateSessionMenu() {
     });
 }
 
-function doJoinSessionMenu() {
+async function doJoinSessionMenu() {
     let joinSessionMenu = addHTMLStringToDiv(Handlebars.partials.joinsession());
     document.body.appendChild(joinSessionMenu);
 
@@ -63,7 +65,36 @@ function doJoinSessionMenu() {
     let joinAsPlayerButton = document.getElementById("join-session-player");
     let joinAsDMButton = document.getElementById("join-session-dm");
 
-    
+    let splitPath = window.location.pathname.split("/");
+
+    let joinAs = async (joinType) => {
+
+        let result = await nm.joinSession(
+            joinType, splitPath[2], 
+            passwordInput.value, usernameInput.value
+        );
+        console.log(result);
+        document.body.removeChild(joinSessionMenu);
+        //window.alert(JSON.stringify(result));
+        // controller.gridDrawer.activeBattlemap = 0;
+        if (controller.session.battlemaps.length == 0) {
+            await getBattlemapFromUser();
+        }
+        controller.gridDrawer.activeBattlemap = 0;
+        td.activeBattlemap = 0;
+        td.setTokens();
+    }
+
+    return new Promise((resolve, reject) => {
+        joinAsPlayerButton.addEventListener("click", async (e) => {
+            await joinAs("player");
+            resolve();
+        });
+        joinAsDMButton.addEventListener("click", async (e) => {
+            await joinAs("dm");
+            resolve();
+        });
+    })
 }
 
 
@@ -77,7 +108,7 @@ async function testMain() {
     // html element dragger
     let dragger = new ElementDragger(c);
 
-    let session = {};
+    window.session = {};
 
     // thing that draws stuff on the canvas
     window.controller = new CanvasController({ canvas: c, session });
@@ -108,6 +139,8 @@ async function testMain() {
         };
     });
 
+    let tilePlaceIndex = 1;
+
     async function loop() {
         await controller.draw(dragger);
 
@@ -119,7 +152,7 @@ async function testMain() {
                     layerId: "0",
                     x: Math.floor(pixelSpaceCoords.x),
                     y: Math.floor(pixelSpaceCoords.y),
-                    tile: 1
+                    tile: tilePlaceIndex
                 }
             ]);
             await controller.draw(dragger, true);
@@ -130,36 +163,33 @@ async function testMain() {
     let splitPath = window.location.pathname.split("/");
     if (splitPath[1] == "game") {
         if (splitPath[2]) {
-
-            // TODO: replace with a GUI
-            let joinType;
-            while (joinType != "player" && joinType != "dm") {
-                joinType = window.prompt("Join as DM or player? (enter 'player' or 'dm')");
-            }
-            let username = window.prompt("Enter username.");
-            let password = window.prompt("Enter password.");
-            let result = await nm.joinSession(joinType, splitPath[2], password, username);
-            window.alert(JSON.stringify(result));
-            // controller.gridDrawer.activeBattlemap = 0;
-            if (controller.session.battlemaps.length == 0) {
-                await getBattlemapFromUser();
-            }
-            controller.gridDrawer.activeBattlemap = 0;
-            td.activeBattlemap = 0;
-            td.setTokens();
+            doJoinSessionMenu();
         }
     }
 
     if (window.location.pathname == "/") {
-
-        // TODO: replace with a GUI
-        // let sessionName = window.prompt("Create new session: Session name:");
-        // let playerPassword = window.prompt("Player password:");
-        // let dmPassword = window.prompt("DM password:");
-        // let createdSession = await nm.createSession(sessionName, playerPassword, dmPassword);
-        // window.location.href = window.location.origin + "/game/" + createdSession.id;
         doCreateSessionMenu();
     }
+
+    let brush = document.getElementById("brush");
+    brush.addEventListener("click", e => {
+        if (controller.gridDrawer.activeBattlemap == -1) return;
+        let imageOptions = {
+            images: session.battlemaps[controller.gridDrawer.activeBattlemap].imagePalette
+            .map(imageURL => {
+                return {
+                    image: imageURL
+                }
+            })
+        };
+        let imageSelector = addHTMLStringToDiv(Handlebars.partials.imageselector(imageOptions));
+        document.body.appendChild(imageSelector);
+        Array.from(document.getElementsByClassName("token_image")).forEach((image, i) => {
+            image.addEventListener("click", e => {
+                tilePlaceIndex = i;
+            });
+        }); 
+    }); 
 
     loop();
 }
