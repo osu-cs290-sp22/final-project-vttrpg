@@ -1,29 +1,16 @@
-Handlebars.partials["Token"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+Handlebars.partials["Token"] = Handlebars.template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
         }
         return undefined
     };
 
-  return "\r\n"
-    + ((stack1 = container.invokePartial(lookupProperty(partials,"bar"),depth0,{"name":"bar","data":data,"indent":"        ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "\r\n";
-},"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
-          return parent[propertyName];
-        }
-        return undefined
-    };
-
-  return "<div class=\"token-main\">\r\n    <div class=\"token-name\">\r\n        <label for=\"token-name-input\"> "
-    + alias4(((helper = (helper = lookupProperty(helpers,"TokenName") || (depth0 != null ? lookupProperty(depth0,"TokenName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"TokenName","hash":{},"data":data,"loc":{"start":{"line":3,"column":39},"end":{"line":3,"column":52}}}) : helper)))
-    + " </label>\r\n        <input type=\"text\" id=\"token-name-input\">\r\n    </div>\r\n\r\n    <div class=\"token-nickname\">\r\n        <label for=\"token-nickname-input\"> "
-    + alias4(((helper = (helper = lookupProperty(helpers,"TokenNickname") || (depth0 != null ? lookupProperty(depth0,"TokenNickname") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"TokenNickname","hash":{},"data":data,"loc":{"start":{"line":8,"column":43},"end":{"line":8,"column":60}}}) : helper)))
-    + " </label>\r\n        <input type=\"text\" id=\"token-nickname-input\">\r\n    </div>\r\n    <div class=\"description\">\r\n        <label for=\"token-description-input\"> "
-    + alias4(((helper = (helper = lookupProperty(helpers,"TokenDescription") || (depth0 != null ? lookupProperty(depth0,"TokenDescription") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"TokenDescription","hash":{},"data":data,"loc":{"start":{"line":12,"column":46},"end":{"line":12,"column":66}}}) : helper)))
-    + " </label>\r\n        <textarea id=\"token-description-input\"></textarea>\r\n    </div>\r\n</div>\r\n<div id=\"bars\">\r\n    \r\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"TokenBar") : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":18,"column":4},"end":{"line":22,"column":13}}})) != null ? stack1 : "")
-    + "\r\n</div>\r\n";
-},"usePartial":true,"useData":true});
+  return "\r\n    <div id=\"token-backdrop\" >\r\n<div class=\"token-header\">\r\n            <h3>Token Menu</h3>\r\n            <button type=\"button\" class=\"token-close\">&times;</button>\r\n        </div>\r\n        <button id=\"token-submit\">Submit</button>\r\n        <div class=\"token-body\">\r\n            <div class=\"token-main\">\r\n                <div class=\"token-name\">\r\n                    <label for=\"token-name-input\">"
+    + alias4(((helper = (helper = lookupProperty(helpers,"TokenName") || (depth0 != null ? lookupProperty(depth0,"TokenName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"TokenName","hash":{},"data":data,"loc":{"start":{"line":11,"column":50},"end":{"line":11,"column":63}}}) : helper)))
+    + "</label>\r\n                    <input type=\"text\" id=\"token-name-input\">\r\n                </div>\r\n\r\n                <div class=\"token-nickname\">\r\n                    <label for=\"token-nickname-input\">"
+    + alias4(((helper = (helper = lookupProperty(helpers,"TokenNickname") || (depth0 != null ? lookupProperty(depth0,"TokenNickname") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"TokenNickname","hash":{},"data":data,"loc":{"start":{"line":16,"column":54},"end":{"line":16,"column":71}}}) : helper)))
+    + "</label>\r\n                    <input type=\"text\" id=\"token-nickname-input\">\r\n                </div>\r\n                \r\n            </div>\r\n            <div class=\"description\">\r\n                <label for=\"token-description-input\">"
+    + alias4(((helper = (helper = lookupProperty(helpers,"TokenDescription") || (depth0 != null ? lookupProperty(depth0,"TokenDescription") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"TokenDescription","hash":{},"data":data,"loc":{"start":{"line":22,"column":53},"end":{"line":22,"column":73}}}) : helper)))
+    + "</label>\r\n                <textarea id=\"token-description-input\"></textarea>\r\n            </div>\r\n            <div id=\"bars\">\r\n                <div class=\"bar1\">\r\n                    <div class=\"bar-header\">\r\n                        <input type=\"color\" id=\"bar1color\" name=\"bar1color\" value=\"#13eb48\">\r\n                        <h3>Bar 1</h3>\r\n                        \r\n                    </div>\r\n                    <input type=\"number\" id=\"bar1-current\">\r\n                    <label for=\"bar1-max\">/</label>\r\n                    <input type=\"number\" id=\"bar1-max\">\r\n                    \r\n                </div>\r\n                <div class=\"bar2\">\r\n                    <div class=\"bar-header\">\r\n                        <input type=\"color\" id=\"bar2color\" name=\"bar2color\" value=\"#136ceb\">\r\n                        <h3>Bar 2</h3>\r\n                       \r\n                    </div>\r\n                    <input type=\"number\" id=\"bar2-current\">\r\n                    <label for=\"bar2-max\">/</label>\r\n                    <input type=\"number\" id=\"bar2-max\">\r\n                    \r\n                </div>\r\n                <div class=\"bar3\">\r\n                    <div class=\"bar-header\">\r\n                        <input type=\"color\" id=\"bar3color\" name=\"bar3color\" value=\"#eb133a\">\r\n                        <h3>Bar 3</h3>\r\n                        \r\n                    </div>\r\n                    <input type=\"number\" id=\"bar3-current\">\r\n                    <label for=\"bar3-max\">/</label>\r\n                    <input type=\"number\" id=\"bar3-max\">\r\n                   \r\n                </div>\r\n               \r\n\r\n\r\n            </div>\r\n        </div>\r\n</div>";
+},"useData":true});

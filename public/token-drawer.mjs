@@ -58,9 +58,11 @@ export class TokenDrawer {
                 // create token menu
                 let tokenMenu = addHTMLStringToDiv(Handlebars.partials.Token(tokens[tokenId]));
                 tokenMenu.style.position = "absolute";
-                tokenMenu.style.bottom = "0";
-                tokenMenu.style.height = "50%";
+                tokenMenu.style.top = "0";
+                tokenMenu.style.right = "0";
+                tokenMenu.style.height = "100%";
                 tokenMenu.style.zIndex = "6";
+                tokenMenu.style.overflow = "scroll";
                 document.body.appendChild(tokenMenu);
                 this.currentlySetTokenMenu = tokenMenu;
             
