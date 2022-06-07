@@ -1,3 +1,4 @@
+/*general tools and icons by Owen Storm
 /* buttons and side bars*/
 .buttonTool {
     flex: 1 0 50px;
@@ -74,6 +75,9 @@
 
 }
 
+
+
+
 /* a class that can make elements hidden, can be added/removed in js*/
 /*.hidden {
     visibility: hidden;
@@ -82,42 +86,156 @@
 
 
 /* Styling for Token Menu by Jaaron Green */
-
+/*modificaitons done by Owen Storm*/
 .token-close {
-    position: fixed;
-    right: 20px;
-}
+    position:relative;
+    left: 173px;
+    bottom: 4px;
+    font-size: 20px;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    padding-top: 2px;
+    border: 0px;
 
+    transition: all ease-in-out 0.2s;
+}
+.token-close:hover {
+    cursor: pointer;
+    background: rgb(73, 73, 73);
+    color: #ececec;
+}
 .token-header {
     display: flex;
     flex-direction: row;
-
+    align-items: center;
+    width: 350px;
+    padding-left:197px;
 }
 
 .token-main {
     display: flex;
     flex-direction: row;
     margin: 10px;
+    align-items: center;
     justify-content: space-between;
+    width: 500px;
+    
+}
 
+.description {
+    margin:10px;
+}
+
+#twit-description-input {
+    width: 494px;
+    height: 100px;
+    
 }
 
 #bars {
     display: flex;
     flex-direction: column;
     margin: 10px;
+
+}
+
+.bar1 {
+    margin-left: 60px;
+}
+.bar2 {
+    margin-left: 60px;
+}
+.bar3 {
+    margin-left: 60px;
+    margin-bottom: 20px;
 }
 
 .bar-header {
     display: flex;
     flex-direction: row;
-    margin: 10px;
+    margin-top: 10px;
     gap: 130px;
     
 }
 
-/* Styling for the main menu by Jaaron Green */
 
+#token-backdrop {
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    width: 519px;
+    background: rgb(73, 73, 73);
+    color: rgb(253, 253, 253);
+    border-radius: 2%;
+
+}
+
+#bar1color:hover {
+    cursor: pointer;
+    background: rgb(73, 73, 73);
+    color: #ececec;
+}
+#bar2color:hover {
+    cursor: pointer;
+    background: rgb(73, 73, 73);
+    color: #ececec;
+}
+#bar3color:hover {
+    cursor: pointer;
+    background: rgb(73, 73, 73);
+    color: #ececec;
+}
+#bar1color {
+    border: 0px;
+    transition: all ease-in-out 0.2s;
+
+
+    transform: rotate(45deg);
+    background-color: #ececec;
+    width: 27px;
+    height: 27px;
+    border-radius: 100%;
+    box-shadow: 3px 3px 6px rgb(0 0 0 / 45%);
+    padding:1px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+#bar2color {
+    border: 0px;
+    transition: all ease-in-out 0.2s;
+
+    transform: rotate(45deg);
+    box-shadow: 3px 3px 6px rgb(0 0 0 / 45%);
+    background-color: #ececec;
+    width: 27px;
+    height: 27px;
+    border-radius: 100%;
+    padding:1px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+#bar3color {
+    border: 0px;
+    transition: all ease-in-out 0.2s;
+
+    transform: rotate(45deg);
+    box-shadow: 3px 3px 6px rgb(0 0 0 / 45%);
+    background-color: #ececec;
+    width: 27px;
+    height: 27px;
+    border-radius: 100%;
+    padding:1px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+
+.token-body {
+    width: 500px;
+}
+
+
+/* Styling for the main menu by Jaaron Green */
 #title {
     text-align: center;
     background-color: azure;
