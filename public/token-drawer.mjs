@@ -29,9 +29,12 @@ export class TokenDrawer {
 
             // create images for tokens
             let img = document.createElement("img");
+            img.oncontextmenu = e => false;
+            img.setAttribute('draggable', false);
             img.src = tokens[tokenId].image;
             img.style.position = "absolute";
             img.style.zIndex = 5;
+
 
             // move and scale the tokens appropriately according to grid
             let moveListener = () => {
@@ -104,6 +107,48 @@ export class TokenDrawer {
             
             }
             img.addEventListener("click", imgClickListener);
+
+
+
+            let isMouseDown = false;
+            let deltaX = 0;
+            let deltaY = 0;
+
+            img.addEventListener("mousedown", e => {
+                if (e.button == 2) isMouseDown = true;
+            });
+            let mouseUp = e => {
+                isMouseDown = false;
+                let newToken = {
+                    ...(tokens[tokenId]),
+                    x: tokens[tokenId].x + deltaX / this.dragger.scale,
+                    y: tokens[tokenId].y + deltaY / this.dragger.scale
+                };
+
+                // set token both locally and remotely
+                nm.setToken(this.activeBattlemap, tokenId, newToken);
+                moveListener();
+
+                deltaX = 0;
+                deltaY = 0;
+            }
+
+            img.addEventListener("mouseup", mouseUp);
+            img.addEventListener("mouseleave", mouseUp);
+
+            img.addEventListener("mousemove", e => {
+                    if (isMouseDown) {
+                        deltaX += e.movementX;
+                        deltaY += e.movementY;
+
+                    let pixelSpacePos = this.dragger.worldSpaceToPixelSpace(
+                        tokens[tokenId].x + deltaX / this.dragger.scale, 
+                        tokens[tokenId].y + deltaY / this.dragger.scale, this.dragger.elem);
+                    img.style.left = `${pixelSpacePos.x}px`;
+                    img.style.top = `${pixelSpacePos.y}px`;
+                    }
+            });
+
 
             // update token if remote changes occur
             nm.mh.onMessage(msg => {
