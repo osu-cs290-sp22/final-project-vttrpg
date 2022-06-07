@@ -1,5 +1,12 @@
 {
-    "imagePalette": ["/test1.png", "/test2.png"],
+    "imagePalette": [
+        "/icons/grass.jpeg",
+        "/icons/bricks.jpeg",
+        "/icons/off_limits.jpeg",
+        "/icons/stone.jpeg",
+        "/icons/tree.jpeg",
+        "/icons/rob.8587b6b0e1fefd5dcca5.jpg"
+    ],
     "width": 3,
     "height": 3,
     "tileLayers": {
