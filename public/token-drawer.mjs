@@ -12,6 +12,27 @@ export class TokenDrawer {
         this.dragger = dragger;
         this.activeBattlemap = -1;
         this.currentlySetTokenMenu = undefined;
+
+        document.getElementById("tokens").addEventListener("click", e => {
+            nm.setToken(this.activeBattlemap, Math.random().toString(), {
+                x: 1, y: 1,
+                image: "/icons/Icon 1.png",
+                TokenName: "name",
+                TokenNickname: "nickname",
+                TokenDescription: "desc",
+                TokenBar: []
+            });
+            this.setTokens();
+        });
+        // update token if remote changes occur
+        nm.mh.onMessage(msg => {
+            if (
+                msg.type == "Battlemap" 
+                && msg.request.type == "SetToken"
+            ) {
+                this.setTokens();
+            }
+        });
     }
 
     setTokens() {
@@ -108,7 +129,9 @@ export class TokenDrawer {
             }
             img.addEventListener("click", imgClickListener);
 
-
+            // if (activeTokenId == tokenId) {
+            //     imgClickListener();
+            // }
 
             let isMouseDown = false;
             let deltaX = 0;
@@ -137,29 +160,20 @@ export class TokenDrawer {
             img.addEventListener("mouseleave", mouseUp);
 
             img.addEventListener("mousemove", e => {
-                    if (isMouseDown) {
-                        deltaX += e.movementX;
-                        deltaY += e.movementY;
+                if (isMouseDown) {
+                    deltaX += e.movementX;
+                    deltaY += e.movementY;
 
                     let pixelSpacePos = this.dragger.worldSpaceToPixelSpace(
                         tokens[tokenId].x + deltaX / this.dragger.scale, 
                         tokens[tokenId].y + deltaY / this.dragger.scale, this.dragger.elem);
                     img.style.left = `${pixelSpacePos.x}px`;
                     img.style.top = `${pixelSpacePos.y}px`;
-                    }
-            });
-
-
-            // update token if remote changes occur
-            nm.mh.onMessage(msg => {
-                if (
-                    msg.type == "Battlemap" 
-                    && msg.request.type == "SetToken"
-                    && activeTokenId == msg.request.tokenId
-                ) {
-                    imgClickListener();
                 }
             });
+
+
+
 
         });
     }
