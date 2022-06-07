@@ -54,7 +54,7 @@ function doCreateSessionMenu() {
     });
 }
 
-async function doJoinSessionMenu() {
+function doJoinSessionMenu() {
     let joinSessionMenu = addHTMLStringToDiv(Handlebars.partials.joinsession());
     document.body.appendChild(joinSessionMenu);
 
@@ -63,36 +63,7 @@ async function doJoinSessionMenu() {
     let joinAsPlayerButton = document.getElementById("join-session-player");
     let joinAsDMButton = document.getElementById("join-session-dm");
 
-    let splitPath = window.location.pathname.split("/");
-
-    let joinAs = async (joinType) => {
-
-        let result = await nm.joinSession(
-            joinType, splitPath[2], 
-            passwordInput.value, usernameInput.value
-        );
-        console.log(result);
-        document.body.removeChild(joinSessionMenu);
-        //window.alert(JSON.stringify(result));
-        // controller.gridDrawer.activeBattlemap = 0;
-        if (controller.session.battlemaps.length == 0) {
-            await getBattlemapFromUser();
-        }
-        controller.gridDrawer.activeBattlemap = 0;
-        td.activeBattlemap = 0;
-        td.setTokens();
-    }
-
-    return new Promise((resolve, reject) => {
-        joinAsPlayerButton.addEventListener("click", async (e) => {
-            await joinAs("player");
-            resolve();
-        });
-        joinAsDMButton.addEventListener("click", async (e) => {
-            await joinAs("dm");
-            resolve();
-        });
-    })
+    
 }
 
 
@@ -161,22 +132,21 @@ async function testMain() {
         if (splitPath[2]) {
 
             // TODO: replace with a GUI
-            // let joinType;
-            // while (joinType != "player" && joinType != "dm") {
-            //     joinType = window.prompt("Join as DM or player? (enter 'player' or 'dm')");
-            // }
-            // let username = window.prompt("Enter username.");
-            // let password = window.prompt("Enter password.");
-            // let result = await nm.joinSession(joinType, splitPath[2], password, username);
-            // window.alert(JSON.stringify(result));
-            // // controller.gridDrawer.activeBattlemap = 0;
-            // if (controller.session.battlemaps.length == 0) {
-            //     await getBattlemapFromUser();
-            // }
+            let joinType;
+            while (joinType != "player" && joinType != "dm") {
+                joinType = window.prompt("Join as DM or player? (enter 'player' or 'dm')");
+            }
+            let username = window.prompt("Enter username.");
+            let password = window.prompt("Enter password.");
+            let result = await nm.joinSession(joinType, splitPath[2], password, username);
+            window.alert(JSON.stringify(result));
             // controller.gridDrawer.activeBattlemap = 0;
-            // td.activeBattlemap = 0;
-            // td.setTokens();
-            doJoinSessionMenu();
+            if (controller.session.battlemaps.length == 0) {
+                await getBattlemapFromUser();
+            }
+            controller.gridDrawer.activeBattlemap = 0;
+            td.activeBattlemap = 0;
+            td.setTokens();
         }
     }
 
