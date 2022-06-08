@@ -1,3 +1,3 @@
 Handlebars.partials["joinsession"] = Handlebars.template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"placeholder-styling\">\n        <input id=\"username-input\" placeholder=\"Username\">\n        <input id=\"password-input\" placeholder=\"Password\">\n        <button id=\"join-session-player\">Join As Player</button>\n        <button id=\"join-session-dm\">Join As DM</button>\n    </div>";
+    return "<div class=\"join-session\">\n    <div class=\"first\">\n        <input id=\"username-input\" placeholder=\"Username\">\n        <input id=\"password-input\" placeholder=\"Password\">\n    </div>\n    <div class=\"sec\">\n        <button id=\"join-session-player\">Join As Player</button>\n        <button id=\"join-session-dm\">Join As The DM</button>\n    </div>\n</div> ";
 },"useData":true});
