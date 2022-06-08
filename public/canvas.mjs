@@ -186,7 +186,7 @@ async function testMain() {
         await controller.draw(dragger);
 
 
-        if (shouldPlace && !(!session.battlemaps || !session.battlemaps[0])) {
+        if (shouldPlace) {
             let pixelSpaceCoords = dragger.pixelSpaceToWorldSpace(placePos.x, placePos.y, c);
             nm.setTiles(controller.gridDrawer.activeBattlemap, [
                 {
@@ -214,7 +214,6 @@ async function testMain() {
 
     let brush = document.getElementById("brush");
     brush.addEventListener("click", e => {
-        if (!session.battlemaps || !session.battlemaps[0]) return;
         if (controller.gridDrawer.activeBattlemap == -1) return;
         let imageOptions = {
             images: session.battlemaps[controller.gridDrawer.activeBattlemap].imagePalette
@@ -244,15 +243,10 @@ async function testMain() {
 testMain();
 
 document.getElementById("maps").addEventListener("click", e => {
-    if (!session.battlemaps || !session.battlemaps[0]) return;
     let saveMap = addHTMLStringToDiv(Handlebars.partials.savemap());
     document.body.appendChild(saveMap);
     let saveMapName = document.getElementById("savemap_name");
     let saveMapButton = document.getElementById("savemap_button");
-    document.getElementById("close_button")
-    .addEventListener("click", async (e) => {
-        document.body.removeChild(saveMap);
-    });
     saveMapButton.addEventListener("click", async (e) => {
         let err = false;
         try {

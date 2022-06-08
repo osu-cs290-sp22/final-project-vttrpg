@@ -6,8 +6,8 @@ Handlebars.partials["imageselector"] = Handlebars.template({"1":function(contain
         return undefined
     };
 
-  return "    <img class=\"token_image\" src="
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"image") || (depth0 != null ? lookupProperty(depth0,"image") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"image","hash":{},"data":data,"loc":{"start":{"line":8,"column":33},"end":{"line":8,"column":42}}}) : helper)))
+  return "    <input type=\"image\" class=\"token_image\" src="
+    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"image") || (depth0 != null ? lookupProperty(depth0,"image") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"image","hash":{},"data":data,"loc":{"start":{"line":8,"column":48},"end":{"line":8,"column":57}}}) : helper)))
     + " width=\"64\" height= \"64\">\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {

@@ -14,7 +14,6 @@ export class TokenDrawer {
         this.currentlySetTokenMenu = undefined;
         this.tokenMoveListeners= [];
         document.getElementById("tokens").addEventListener("click", e => {
-            if (!this.session.battlemaps || !this.session.battlemaps[0]) return;
             nm.setToken(this.activeBattlemap, Math.random().toString(), {
                 x: 1, y: 1,
                 image: `/icons/Icon ${Math.floor(Math.random() * 16) + 1}.png`,
