@@ -54,10 +54,10 @@ export class TokenDrawer {
             this.dragger.removeOnMove(listener);
         });
         this.mouseUpListeners.forEach(listener => {
-            document.removeEventListener(listener);
+            document.removeEventListener("mouseup", listener);
         });
         this.mouseMoveListeners.forEach(listener => {
-            document.removeEventListener(listener);
+            document.removeEventListener("mousemove", listener);
         });
         this.tokenMoveListeners = [];
         this.mouseUpListeners = [];
