@@ -266,13 +266,18 @@ body {
 
 
 
-.placeholder-styling {
+.menu {
+    font-family: sans-serif;
     position: absolute;
-    top: 45%;
-    left: 45%;
+    width: 50%;
+    top: 40%;
+    left: 25%;
     z-index: 10;
-    border: 1px solid red;
-    background: white;
+    background: rgb(73, 73, 73);
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 3px 3px 6px rgb(0 0 0 / 45%);
 }
 
 /* More handlebars stuff */
@@ -284,8 +289,6 @@ body {
     margin: auto;
     width: 25%;
     margin-bottom: 20px;
-    position: absolute;
-    width: 100%;
     
 }
 
@@ -293,8 +296,6 @@ body {
     text-align: center;
     display: flex;
     justify-content: center;
-    position: absolute;
-    width: 100%;
 
 }
 
@@ -302,8 +303,6 @@ body {
     text-align: center;
     display: flex;
     justify-content: center;
-    position: absolute;
-    width: 100%;
 }
 
 .join-session {
@@ -311,8 +310,6 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    position: absolute;
-    width: 100%;
     
 }
 

@@ -1,3 +1,3 @@
 Handlebars.partials["createsession"] = Handlebars.template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"create-session\">\n    <input id=\"session-name-input\" placeholder=\"Session Name\">\n    <input id=\"password-input\" placeholder=\"Password\">\n    <input id=\"dm-password-input\" placeholder=\"DM Password\">\n    <button id=\"create-session\">Create Session</button>\n</div> ";
+    return "<div class=\"create-session menu\">\n    <input id=\"session-name-input\" placeholder=\"Session Name\">\n    <input id=\"password-input\" placeholder=\"Password\">\n    <input id=\"dm-password-input\" placeholder=\"DM Password\">\n    <button id=\"create-session\">Create Session</button>\n</div> ";
 },"useData":true});
