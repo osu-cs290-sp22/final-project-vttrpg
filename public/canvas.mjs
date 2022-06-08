@@ -115,6 +115,10 @@ async function doJoinSessionMenu() {
             passwordInput.value, usernameInput.value
         );
         console.log(result);
+        if (!result.success) {
+            window.alert(result.reason);
+            return;
+        }
         document.body.removeChild(joinSessionMenu);
         //window.alert(JSON.stringify(result));
         // controller.gridDrawer.activeBattlemap = 0;
@@ -122,6 +126,7 @@ async function doJoinSessionMenu() {
             await getBattlemapFromUser();
         }
         controller.gridDrawer.activeBattlemap = 0;
+        controller.draw(dragger, true);
         td.activeBattlemap = 0;
         td.setTokens();
     }
@@ -147,7 +152,7 @@ async function testMain() {
     let ctx = c.getContext("2d");
 
     // html element dragger
-    let dragger = new ElementDragger(c);
+    window.dragger = new ElementDragger(c);
 
     window.session = {};
 

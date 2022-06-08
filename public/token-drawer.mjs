@@ -13,6 +13,8 @@ export class TokenDrawer {
         this.activeBattlemap = -1;
         this.currentlySetTokenMenu = undefined;
         this.tokenMoveListeners= [];
+        this.mouseUpListeners= [];
+        this.mouseMoveListeners= [];
         document.getElementById("tokens").addEventListener("click", e => {
             if (!this.session.battlemaps || !this.session.battlemaps[0]) return;
             nm.setToken(this.activeBattlemap, Math.random().toString(), {
@@ -51,7 +53,15 @@ export class TokenDrawer {
         this.tokenMoveListeners.forEach(listener => {
             this.dragger.removeOnMove(listener);
         });
+        this.mouseUpListeners.forEach(listener => {
+            document.removeEventListener(listener);
+        });
+        this.mouseMoveListeners.forEach(listener => {
+            document.removeEventListener(listener);
+        });
         this.tokenMoveListeners = [];
+        this.mouseUpListeners = [];
+        this.mouseMoveListeners = [];
         Object.keys(tokens).forEach((tokenId) => {    
 
             // create images for tokens
@@ -172,10 +182,11 @@ export class TokenDrawer {
                 deltaY = 0;
             }
 
-            img.addEventListener("mouseup", mouseUp);
-            img.addEventListener("mouseleave", mouseUp);
+            document.addEventListener("mouseup", mouseUp);
+            this.mouseUpListeners.push(mouseUp);
+            //img.addEventListener("mouseleave", mouseUp);
 
-            img.addEventListener("mousemove", e => {
+            let mouseMove = e => {
                 if (isMouseDown) {
                     deltaX += e.movementX;
                     deltaY += e.movementY;
@@ -186,7 +197,10 @@ export class TokenDrawer {
                     img.style.left = `${pixelSpacePos.x}px`;
                     img.style.top = `${pixelSpacePos.y}px`;
                 }
-            });
+            }
+
+            document.addEventListener("mousemove", mouseMove);
+            this.mouseMoveListeners.push(mouseMove);
 
 
 
